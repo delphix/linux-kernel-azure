@@ -5,9 +5,6 @@ module-signature-check-%: $(stampdir)/stamp-install-%
 		"$(DROOT)/$(mods_pkg_name)-$*" \
 		"$(DROOT)/$(mods_extra_pkg_name)-$*"
 
-checks-%: module-signature-check-%
-	@echo Debug: $@
-
 # Check the config against the known options list.
 config-prepare-check-%: $(stampdir)/stamp-prepare-tree-%
 	@echo Debug: $@
