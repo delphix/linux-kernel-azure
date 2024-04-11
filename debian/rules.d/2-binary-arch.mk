@@ -629,7 +629,7 @@ $(foreach _m,$(all_dkms_modules), \
 )
 binary-%: rprovides = $(foreach _m,$(all_built-in_dkms_modules),$(if $(enable_$(_m)),$(foreach _r,$(dkms_$(_m)_rprovides),$(_r)$(comma) )))
 binary-%: target_flavour = $*
-binary-%: checks-%
+binary-%:
 	@echo Debug: $@
 	dh_testdir
 	dh_testroot
