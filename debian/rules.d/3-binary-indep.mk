@@ -77,8 +77,8 @@ install-tools: $(stampdir)/stamp-build-perarch
 	@echo Debug: $@
 
 ifeq ($(do_tools_common),true)
-	dh_prep -p$(toolspkg)
-	dh_prep -p$(perfpkg)
+	dh_prep -p$(toolspkg)-$*
+	dh_prep -p$(perfpkg)-$*
 
 	rm -rf $(builddir)/tools
 	install -d $(builddir)/tools
