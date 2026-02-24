@@ -127,6 +127,11 @@ endif
 # Either tools package needs the common source preparation
 do_any_tools=$(sort $(filter-out false,$(do_linux_tools) $(do_cloud_tools)))
 
+ifeq ($(do_tools_common),true)
+       control_files += debian/control.d/linux-tools-common.stub
+       control_files += debian/control.d/linux-cloud-tools-common.stub
+endif
+
 # Debian Build System targets
 .PHONY: binary
 binary: binary-indep binary-arch
@@ -165,11 +170,6 @@ include debian/rules.d/3-binary-indep.mk
 
 # Calculate Ubuntu Compatible Signing levels
 UBUNTU_COMPATIBLE_SIGNING=$(shell grep -qx ' *Subject: C = GB, ST = Isle of Man, O = Canonical Ltd., OU = Secure Boot, CN = Canonical Ltd. Secure Boot Signing (2021 v3)' debian/canonical-revoked-certs.pem && echo ubuntu/4 pro/3)
-
-ifeq ($(do_tools_common),true)
-       control_files += debian/control.d/linux-tools-common.stub
-       control_files += debian/control.d/linux-cloud-tools-common.stub
-endif
 
 # Misc stuff
 debian/control: debian/canonical-revoked-certs.pem $(DEBIAN)/changelog FORCE
