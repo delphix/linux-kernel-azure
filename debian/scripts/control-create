@@ -15,7 +15,7 @@ fi
 gen_common () {
 	local stubs=("${DEBIAN}/control.stub.in")
 
-	if [ "${DEB_SOURCE}" = linux ]; then
+	if [[ "${DEB_SOURCE}" = linux* ]]; then
 		stubs+=(
 			debian/control.d/linux-libc-dev.stub
 			debian/control.d/linux-tools-common.stub
